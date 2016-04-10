@@ -18,26 +18,19 @@ namespace PAIN_lab2
         private Form listForm;
         private List<Point> points;
 
-        public MDIParent1()
+        public MDIParent1(List<Point> points)
         {
             InitializeComponent();
 
-            points = new List<Point>();
+            this.points = points;
 
-            //listForm = new ListForm(this.points);
-            listForm = new ListForm();
+            listForm = new ListForm(this.points);
             listForm.MdiParent = this;
             listForm.Show();
 
             treeForm = new Form();
             treeForm.MdiParent = this;
             treeForm.Show();
-        }
-
-        private void fillPoints() {
-            points.Add(new Point(1, 2, 3));
-            points.Add(new Point(3, 2, 1));
-            points.Add(new Point(3, 3, 3));
         }
 
         private void ShowNewForm(object sender, EventArgs e)

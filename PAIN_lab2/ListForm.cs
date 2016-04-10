@@ -16,14 +16,11 @@ namespace PAIN_lab2
         private ListView listView;
         private List<Point> points;
 
-        public ListForm()
+        public ListForm(List<Point> points)
         {
             InitializeComponent();
 
-            this.points = new List<Point>();
-            points.Add(new Point(1, 2, 3));
-            points.Add(new Point(3, 2, 1));
-            points.Add(new Point(3, 3, 3));
+            this.points = points;
 
             createListView();
         }
@@ -39,18 +36,13 @@ namespace PAIN_lab2
             listView.Columns.Add("y", 50);
             listView.Columns.Add("z", 50);
 
-            List<Point> points = new List<Point>();
-            points.Add(new Point(1, 2, 3));
-            points.Add(new Point(3, 2, 1));
-            points.Add(new Point(3, 3, 3));
-
-            fillListView(listView, points);
+            fillListView(listView);
 
             listView.Show();
             this.Controls.Add(listView);
         }
 
-        private void fillListView(ListView listView, List<Point> points) {
+        private void fillListView(ListView listView) {
             int i = 0;
             foreach (Point p in points) {
                 ListViewItem item = new ListViewItem(new String[] { i++ + "", p.getX() + "", p.getY() + "", p.getZ() + ""});

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PAIN_lab2
 {
-    class Point
+    public class Point
     {
         private double x, y, z;
 
