@@ -33,12 +33,9 @@ namespace PAIN_lab2
             treeForm.Show();
         }
 
-        private void ShowNewForm(object sender, EventArgs e)
+        private void CreateNewPoint(object sender, EventArgs e)
         {
-            Form childForm = new Form();
-            childForm.MdiParent = this;
-            childForm.Text = "Window " + childFormNumber++;
-            childForm.Show();
+            new NewPointForm(points).Show();
         }
 
         private void OpenFile(object sender, EventArgs e)

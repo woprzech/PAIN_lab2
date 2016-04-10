@@ -12,7 +12,6 @@ namespace PAIN_lab2
 {
     public partial class ListForm : Form
     {
-
         private ListView listView;
         private List<Point> points;
 
@@ -25,7 +24,6 @@ namespace PAIN_lab2
             createListView();
         }
 
-
         private void createListView() {
             listView = new ListView();
             listView.View = View.Details;
@@ -36,13 +34,13 @@ namespace PAIN_lab2
             listView.Columns.Add("y", 50);
             listView.Columns.Add("z", 50);
 
-            fillListView(listView);
+            fillListView();
 
             listView.Show();
             this.Controls.Add(listView);
         }
 
-        private void fillListView(ListView listView) {
+        private void fillListView() {
             int i = 0;
             foreach (Point p in points) {
                 ListViewItem item = new ListViewItem(new String[] { i++ + "", p.getX() + "", p.getY() + "", p.getZ() + ""});
