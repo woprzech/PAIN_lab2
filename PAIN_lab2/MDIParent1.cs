@@ -28,7 +28,7 @@ namespace PAIN_lab2
             listForm.MdiParent = this;
             listForm.Show();
 
-            treeForm = new Form();
+            treeForm = new TreeForm(this.points);
             treeForm.MdiParent = this;
             treeForm.Show();
         }
