@@ -13,29 +13,35 @@ namespace PAIN_lab2
     public partial class MDIParent1 : Form
     {
         private int childFormNumber = 0;
+        public AppModel AppModel { get; set; }
 
         private Form treeForm;
         private Form listForm;
         private List<Point> points;
 
-        public MDIParent1(List<Point> points)
+        public MDIParent1(AppModel model)
         {
             InitializeComponent();
 
-            this.points = points;
+            this.AppModel = model;
 
-            listForm = new ListForm(this.points);
+            listForm = new ListForm(model);
             listForm.MdiParent = this;
             listForm.Show();
 
-            treeForm = new TreeForm(this.points);
+            treeForm = new TreeForm(model);
             treeForm.MdiParent = this;
             treeForm.Show();
         }
 
         private void CreateNewPoint(object sender, EventArgs e)
         {
-            new NewPointForm(points).Show();
+            Point p = new Point();
+            NewPointForm pointForm = new NewPointForm(p);
+            if (pointForm.ShowDialog() == DialogResult.OK)
+            {
+                AppModel.AddPoint(p);
+            }
         }
 
         private void OpenFile(object sender, EventArgs e)
@@ -104,5 +110,6 @@ namespace PAIN_lab2
                 childForm.Close();
             }
         }
+
     }
 }

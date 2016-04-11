@@ -10,6 +10,8 @@ namespace PAIN_lab2
     {
         private double x, y, z;
 
+        public Point() { }
+
         public Point(double x, double y, double z)
         {
             this.x = x;
@@ -17,7 +19,8 @@ namespace PAIN_lab2
             this.z = z;
         }
 
-        public void changeX(double x) {
+        public void changeX(double x)
+        {
             this.x = x;
         }
 

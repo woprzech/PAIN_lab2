@@ -12,13 +12,13 @@ namespace PAIN_lab2
 {
     public partial class NewPointForm : Form
     {
-        private List<Point> points;
+        private Point point;
 
-        public NewPointForm(List<Point> points)
+        public NewPointForm(Point point)
         {
             InitializeComponent();
 
-            this.points = points;
+            this.point = point;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -32,10 +32,11 @@ namespace PAIN_lab2
             double y = Convert.ToDouble(this.textBoxY.Text);
             double z = Convert.ToDouble(this.textBoxZ.Text);
 
-            Point newPoint = new Point(x, y, z);
-            points.Add(newPoint);
-
-            this.Close();
+            point.changeX(x);
+            point.changeY(y);
+            point.changeZ(z);
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void button2_Click(object sender, EventArgs e)

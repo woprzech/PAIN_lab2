@@ -10,21 +10,28 @@ using System.Windows.Forms;
 
 namespace PAIN_lab2
 {
-    public partial class ListForm : Form
+    public partial class ListForm : BaseForm
     {
         private ListView listView;
-        private List<Point> points;
 
         public ListForm(List<Point> points)
         {
             InitializeComponent();
 
-            this.points = points;
-
-            createListView();
+            createListView(points);
         }
 
-        private void createListView() {
+        public ListForm(AppModel appModel)
+            : base(appModel)
+        {
+            InitializeComponent();
+
+
+            createListView(appModel.Points);
+        }
+
+        private void createListView(IReadOnlyCollection<Point> points)
+        {
             listView = new ListView();
             listView.View = View.Details;
             listView.Size = new System.Drawing.Size(200, 200);
@@ -34,18 +41,23 @@ namespace PAIN_lab2
             listView.Columns.Add("y", 50);
             listView.Columns.Add("z", 50);
 
-            fillListView();
+            int i = 0;
+            foreach (Point p in points)
+            {
+                ListViewItem item = new ListViewItem(new String[] { i++ + "", p.getX() + "", p.getY() + "", p.getZ() + "" });
+                listView.Items.Add(item);
+            }
 
             listView.Show();
             this.Controls.Add(listView);
         }
 
-        private void fillListView() {
-            int i = 0;
-            foreach (Point p in points) {
-                ListViewItem item = new ListViewItem(new String[] { i++ + "", p.getX() + "", p.getY() + "", p.getZ() + ""});
-                listView.Items.Add(item);
-            }
+        protected override void PointAdded(object sender, EventArgs args)
+        {
+            Point p = (Point)sender;
+            ListViewItem item = new ListViewItem(new String[] { AppModel.Points.Count + "", p.getX() + "", p.getY() + "", p.getZ() + "" });
+            listView.Items.Add(item);
+            //base.PointAdded
         }
     }
 }

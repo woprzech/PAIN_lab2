@@ -18,15 +18,14 @@ namespace PAIN_lab2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            fillPoints();
-            Application.Run(new MDIParent1(points));
+            AppModel model = new AppModel();
+            Point point = new Point(2, 3, 1);
+            model.AddPoint(point);
+            Application.Run(new MDIParent1(model));
         }
 
         static private void fillPoints()
         {
-            points.Add(new Point(1, 2, 3));
-            points.Add(new Point(3, 2, 1));
-            points.Add(new Point(3, 3, 3));
         }
     }
 }

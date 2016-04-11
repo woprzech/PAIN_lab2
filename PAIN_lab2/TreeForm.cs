@@ -10,65 +10,60 @@ using System.Windows.Forms;
 
 namespace PAIN_lab2
 {
-    public partial class TreeForm : Form
+    public partial class TreeForm : BaseForm
     {
         private TreeView treeView;
-        private List<Point> points;
+        private TreeNode rootNode;
 
-        public TreeForm(List<Point> points)
+        public TreeForm(AppModel model)
+            : base(model)
         {
             InitializeComponent();
 
-            this.points = points;
-
-            createTreeView();
+            createTreeView(model.Points);
         }
 
-        private void createTreeView()
+        private void createTreeView(IReadOnlyCollection<Point> points)
         {
             treeView = new TreeView();
             //treeView.View = View.Details;
             treeView.Size = new System.Drawing.Size(200, 200);
-            int counter = 0;
-            TreeNode[] pointNodes = new TreeNode[3];
-
+            rootNode = new TreeNode("points");
             foreach (Point p in points)
             {
-                TreeNode xValue = new TreeNode(p.getX() + "");
-                TreeNode[] children = new TreeNode[] { xValue };
-                TreeNode xName = new TreeNode("x", children);
-                TreeNode yValue = new TreeNode(p.getY() + "");
-                children = new TreeNode[] { yValue };
-                TreeNode yName = new TreeNode("y", children);
-                TreeNode zValue = new TreeNode(p.getZ() + "");
-                children = new TreeNode[] { zValue };
-                TreeNode zName = new TreeNode("z", children);
-                children = new TreeNode[] { xName, yName, zName };
-                TreeNode pointNode = new TreeNode("point", children);
-                pointNodes[counter++] = pointNode;
+                TreeNode pointNode = preparePointElement(p);
+                rootNode.Nodes.Add(pointNode);
             }
-            TreeNode rootNode = new TreeNode("points", pointNodes);
-
-            TreeNode treeNode = new TreeNode("Windows");
-            //
-            // Another node following the first node.
-            //
-            treeNode = new TreeNode("Linux");
-            //
-            // Create two child nodes and put them in an array.
-            // ... Add the third node, and specify these as its children.
-            //
-            TreeNode node2 = new TreeNode("C#");
-            TreeNode node3 = new TreeNode("VB.NET");
-            TreeNode[] array = new TreeNode[] { node2, node3 };
-            //
-            // Final node.
-            //
-            treeNode = new TreeNode("Dot Net Perls", array);
             treeView.Nodes.Add(rootNode);
             treeView.Show();
             this.Controls.Add(treeView);
 
+        }
+
+        private TreeNode preparePointElement(Point p)
+        {
+            TreeNode xValue = new TreeNode(p.getX() + "");
+            TreeNode xName = new TreeNode("x");
+            xName.Nodes.Add(xValue);
+            TreeNode yValue = new TreeNode(p.getY() + "");
+            TreeNode yName = new TreeNode("y");
+            yName.Nodes.Add(yValue);
+            TreeNode zValue = new TreeNode(p.getZ() + "");
+            TreeNode zName = new TreeNode("z");
+            zName.Nodes.Add(zValue);
+            TreeNode pointNode = new TreeNode("point");
+            pointNode.Nodes.Add(xName);
+            pointNode.Nodes.Add(yName);
+            pointNode.Nodes.Add(zName);
+            return pointNode;
+        }
+
+        protected override void PointAdded(object sender, EventArgs args)
+        {
+            Point p = (Point)sender;
+            TreeNode pointNode = preparePointElement(p);
+            rootNode.Nodes.Add(pointNode);
+            base.PointAdded(sender, args);
         }
 
     }
