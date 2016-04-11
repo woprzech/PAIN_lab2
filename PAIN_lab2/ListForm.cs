@@ -12,7 +12,6 @@ namespace PAIN_lab2
 {
     public partial class ListForm : BaseForm
     {
-        private ListView listView;
 
         public ListForm(List<Point> points)
         {
@@ -32,31 +31,35 @@ namespace PAIN_lab2
 
         private void createListView(IReadOnlyCollection<Point> points)
         {
-            listView = new ListView();
-            listView.View = View.Details;
-            listView.Size = new System.Drawing.Size(200, 200);
 
-            listView.Columns.Add("#", 50);
-            listView.Columns.Add("x", 50);
-            listView.Columns.Add("y", 50);
-            listView.Columns.Add("z", 50);
+            ////listView.Columns.Add("#", 50);
+            ////listView.Columns.Add("x", 50);
+            ////listView.Columns.Add("y", 50);
+            ////listView.Columns.Add("z", 50);
 
             int i = 0;
+            listView.BeginUpdate();
             foreach (Point p in points)
             {
-                ListViewItem item = new ListViewItem(new String[] { i++ + "", p.getX() + "", p.getY() + "", p.getZ() + "" });
-                listView.Items.Add(item);
+                listView.Items.Add(prepareListItemFromPoint(p));
             }
+            listView.EndUpdate();
+        }
 
-            listView.Show();
-            this.Controls.Add(listView);
+        private ListViewItem prepareListItemFromPoint(Point p)
+        {
+            ListViewItem item = new ListViewItem("#" + AppModel.COUNTER++);
+            item.SubItems.Add(p.getX().ToString());
+            item.SubItems.Add(p.getY().ToString());
+            item.SubItems.Add("color");
+            item.Tag = p;
+            return item;
         }
 
         protected override void PointAdded(object sender, EventArgs args)
         {
             Point p = (Point)sender;
-            ListViewItem item = new ListViewItem(new String[] { AppModel.Points.Count + "", p.getX() + "", p.getY() + "", p.getZ() + "" });
-            listView.Items.Add(item);
+            listView.Items.Add(prepareListItemFromPoint(p));
             //base.PointAdded
         }
     }

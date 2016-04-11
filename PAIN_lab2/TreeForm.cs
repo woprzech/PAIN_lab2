@@ -12,7 +12,6 @@ namespace PAIN_lab2
 {
     public partial class TreeForm : BaseForm
     {
-        private TreeView treeView;
         private TreeNode rootNode;
 
         public TreeForm(AppModel model)
@@ -25,9 +24,7 @@ namespace PAIN_lab2
 
         private void createTreeView(IReadOnlyCollection<Point> points)
         {
-            treeView = new TreeView();
             //treeView.View = View.Details;
-            treeView.Size = new System.Drawing.Size(200, 200);
             rootNode = new TreeNode("points");
             foreach (Point p in points)
             {
@@ -35,8 +32,6 @@ namespace PAIN_lab2
                 rootNode.Nodes.Add(pointNode);
             }
             treeView.Nodes.Add(rootNode);
-            treeView.Show();
-            this.Controls.Add(treeView);
 
         }
 
@@ -48,13 +43,13 @@ namespace PAIN_lab2
             TreeNode yValue = new TreeNode(p.getY() + "");
             TreeNode yName = new TreeNode("y");
             yName.Nodes.Add(yValue);
-            TreeNode zValue = new TreeNode(p.getZ() + "");
-            TreeNode zName = new TreeNode("z");
-            zName.Nodes.Add(zValue);
+            TreeNode colorValue = new TreeNode("color");
+            TreeNode colorName = new TreeNode("color");
+            colorName.Nodes.Add(colorValue);
             TreeNode pointNode = new TreeNode("point");
             pointNode.Nodes.Add(xName);
             pointNode.Nodes.Add(yName);
-            pointNode.Nodes.Add(zName);
+            pointNode.Nodes.Add(colorName);
             return pointNode;
         }
 

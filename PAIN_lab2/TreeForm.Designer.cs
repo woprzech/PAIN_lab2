@@ -28,13 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.treeView = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
+            // 
+            // treeView
+            // 
+            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView.Location = new System.Drawing.Point(0, 0);
+            this.treeView.Name = "treeView";
+            this.treeView.Size = new System.Drawing.Size(284, 261);
+            this.treeView.TabIndex = 0;
             // 
             // TreeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.treeView);
             this.Name = "TreeForm";
             this.Text = "TreeForm";
             this.ResumeLayout(false);
@@ -42,6 +52,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.TreeView treeView;
 
     }
 }

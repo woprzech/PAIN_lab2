@@ -30,11 +30,9 @@ namespace PAIN_lab2
         {
             double x = Convert.ToDouble(this.textBoxX.Text);
             double y = Convert.ToDouble(this.textBoxY.Text);
-            double z = Convert.ToDouble(this.textBoxZ.Text);
 
             point.changeX(x);
             point.changeY(y);
-            point.changeZ(z);
             DialogResult = DialogResult.OK;
             Close();
         }

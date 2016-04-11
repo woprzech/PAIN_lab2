@@ -10,6 +10,7 @@ namespace PAIN_lab2
     {
         private List<Point> points = new List<Point>();
         public event EventHandler PointAdded;
+        public static int COUNTER = 0;
 
         public IReadOnlyCollection<Point> Points
         {
