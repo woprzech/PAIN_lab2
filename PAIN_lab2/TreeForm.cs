@@ -50,6 +50,7 @@ namespace PAIN_lab2
             pointNode.Nodes.Add(xName);
             pointNode.Nodes.Add(yName);
             pointNode.Nodes.Add(colorName);
+            pointNode.Tag = p;
             return pointNode;
         }
 
@@ -59,6 +60,27 @@ namespace PAIN_lab2
             TreeNode pointNode = preparePointElement(p);
             rootNode.Nodes.Add(pointNode);
             base.PointAdded(sender, args);
+        }
+
+        protected override void RemovePoint(object sender, EventArgs args)
+        {
+            Point p = (Point)sender;
+            foreach (TreeNode node in rootNode.Nodes)
+            {
+                if (node.Tag.Equals(p))
+                {
+                    node.Remove();
+                }
+            }
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            TreeNode item = treeView.SelectedNode;
+            if (item.Tag != null)
+            {
+                AppModel.RemovePoint((Point)item.Tag);
+            }
         }
 
     }

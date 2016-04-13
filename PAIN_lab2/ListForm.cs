@@ -46,6 +46,7 @@ namespace PAIN_lab2
             listView.EndUpdate();
         }
 
+
         private ListViewItem prepareListItemFromPoint(Point p)
         {
             ListViewItem item = new ListViewItem("#" + AppModel.COUNTER++);
@@ -62,5 +63,31 @@ namespace PAIN_lab2
             listView.Items.Add(prepareListItemFromPoint(p));
             //base.PointAdded
         }
+
+        protected override void RemovePoint(object sender, EventArgs args)
+        {
+            Point p = (Point)sender;
+            foreach (ListViewItem item in listView.Items)
+            {
+                if (item.Tag.Equals(p))
+                {
+                    listView.Items.Remove(item);
+                }
+            }
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listView.SelectedItems)
+            {
+                AppModel.RemovePoint((Point)item.Tag);
+            }
+        }
+
     }
 }

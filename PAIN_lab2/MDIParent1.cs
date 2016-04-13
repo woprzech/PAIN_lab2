@@ -32,6 +32,7 @@ namespace PAIN_lab2
             treeForm = new TreeForm(model);
             treeForm.MdiParent = this;
             treeForm.Show();
+            RefreshStatusString();
         }
 
         private void CreateNewPoint(object sender, EventArgs e)
@@ -41,7 +42,13 @@ namespace PAIN_lab2
             if (pointForm.ShowDialog() == DialogResult.OK)
             {
                 AppModel.AddPoint(p);
+                RefreshStatusString();
             }
+        }
+
+        private void RefreshStatusString()
+        {
+            toolStripStatusLabel.Text = "Wyświetlono " + AppModel.Points.Count + " punktów.";
         }
 
         private void OpenFile(object sender, EventArgs e)
@@ -66,21 +73,23 @@ namespace PAIN_lab2
             }
         }
 
+        private void OpenNewListView(object sender, EventArgs e)
+        {
+            listForm = new ListForm(AppModel);
+            listForm.MdiParent = this;
+            listForm.Show();
+        }
+
+        private void OpenNewTreeView(object sender, EventArgs e)
+        {
+            treeForm = new TreeForm(AppModel);
+            treeForm.MdiParent = this;
+            treeForm.Show();
+        }
+
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
         }
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)

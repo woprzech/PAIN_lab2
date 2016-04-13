@@ -25,6 +25,7 @@ namespace PAIN_lab2
 
             AppModel = appModel;
             appModel.PointAdded += PointAdded;
+            appModel.PointRemoved += RemovePoint;
             //appModel.PointChanged += PointChanged;
             //appModel.PointRemoved += PointRemoved;
 
@@ -32,10 +33,11 @@ namespace PAIN_lab2
 
         protected virtual void PointAdded(object sender, EventArgs args)
         {
-            //if (PointCounterChanged != null)
-            //{
-            //    PointCounterChanged.Invoke(this, null);
-            //}
+        }
+
+        protected virtual void RemovePoint(object sender, EventArgs args)
+        {
+
         }
     }
 }
