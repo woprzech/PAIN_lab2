@@ -51,11 +51,19 @@
     <Compile Include="BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewPointForm.cs">
+    <Compile Include="ColorDef.cs" />
+    <Compile Include="controls\ColorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\ColorControl.Designer.cs">
+      <DependentUpon>ColorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controls\ColorEditor.cs" />
+    <Compile Include="PointForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewPointForm.Designer.cs">
-      <DependentUpon>NewPointForm.cs</DependentUpon>
+    <Compile Include="PointForm.Designer.cs">
+      <DependentUpon>PointForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TreeForm.cs">
       <SubType>Form</SubType>
@@ -78,8 +86,11 @@
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="NewPointForm.resx">
-      <DependentUpon>NewPointForm.cs</DependentUpon>
+    <EmbeddedResource Include="controls\ColorControl.resx">
+      <DependentUpon>ColorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PointForm.resx">
+      <DependentUpon>PointForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TreeForm.resx">
       <DependentUpon>TreeForm.cs</DependentUpon>

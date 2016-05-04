@@ -25,9 +25,8 @@ namespace PAIN_lab2
 
             AppModel = appModel;
             appModel.PointAdded += PointAdded;
-            appModel.PointRemoved += RemovePoint;
-            //appModel.PointChanged += PointChanged;
-            //appModel.PointRemoved += PointRemoved;
+            appModel.PointRemoved += PointRemoved;
+            appModel.PointEdited += PointEdited;
 
         }
 
@@ -35,9 +34,27 @@ namespace PAIN_lab2
         {
         }
 
-        protected virtual void RemovePoint(object sender, EventArgs args)
+        protected virtual void PointRemoved(object sender, EventArgs args)
         {
+        }
 
+        protected virtual void PointEdited(object sender, EventArgs args)
+        {
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            MDIParent1 parent = (MDIParent1)Parent.Parent;
+            var reason = (FormClosingEventArgs)e;
+            if (parent.childFormNumber <= 1 && reason.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                base.OnClosing(e);
+                parent.childFormNumber--;
+            }
         }
     }
 }

@@ -12,12 +12,11 @@ namespace PAIN_lab2
 {
     public partial class MDIParent1 : Form
     {
-        private int childFormNumber = 0;
+        public int childFormNumber = 0;
         public AppModel AppModel { get; set; }
 
         private Form treeForm;
         private Form listForm;
-        private List<Point> points;
 
         public MDIParent1(AppModel model)
         {
@@ -33,12 +32,14 @@ namespace PAIN_lab2
             treeForm.MdiParent = this;
             treeForm.Show();
             RefreshStatusString();
+            childFormNumber = 2;
+            model.PointRemoved += RefreshStatus;
         }
 
         private void CreateNewPoint(object sender, EventArgs e)
         {
             Point p = new Point();
-            NewPointForm pointForm = new NewPointForm(p);
+            PointForm pointForm = new PointForm(p);
             if (pointForm.ShowDialog() == DialogResult.OK)
             {
                 AppModel.AddPoint(p);
@@ -46,7 +47,12 @@ namespace PAIN_lab2
             }
         }
 
-        private void RefreshStatusString()
+        private void RefreshStatus(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Wyświetlono " + (AppModel.Points.Count - 1) + " punktów.";
+        }
+
+        public void RefreshStatusString()
         {
             toolStripStatusLabel.Text = "Wyświetlono " + AppModel.Points.Count + " punktów.";
         }
@@ -78,6 +84,7 @@ namespace PAIN_lab2
             listForm = new ListForm(AppModel);
             listForm.MdiParent = this;
             listForm.Show();
+            childFormNumber++;
         }
 
         private void OpenNewTreeView(object sender, EventArgs e)
@@ -85,6 +92,7 @@ namespace PAIN_lab2
             treeForm = new TreeForm(AppModel);
             treeForm.MdiParent = this;
             treeForm.Show();
+            childFormNumber++;
         }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)

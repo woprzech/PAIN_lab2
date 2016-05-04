@@ -8,15 +8,17 @@ namespace PAIN_lab2
 {
     public class Point
     {
-        private double x, y, z;
+        private string label;
+        private double x, y;
+        private ColorDef color;
 
         public Point() { }
 
-        public Point(double x, double y, double z)
+        public Point(string label, double x, double y)
         {
+            this.label = label;
             this.x = x;
             this.y = y;
-            this.z = z;
         }
 
         public void changeX(double x)
@@ -29,10 +31,12 @@ namespace PAIN_lab2
             this.y = y;
         }
 
-        public void changeZ(double z)
+        public void changeLabel(string label)
         {
-            this.z = z;
+            this.label = label;
         }
+
+        public void changeColor(ColorDef color) { this.color = color; }
 
         public double getX()
         {
@@ -44,9 +48,9 @@ namespace PAIN_lab2
             return y;
         }
 
-        public double getZ()
-        {
-            return z;
-        }
+        public string getLabel() { return label; }
+
+        public ColorDef getColor() { return color; }
+
     }
 }

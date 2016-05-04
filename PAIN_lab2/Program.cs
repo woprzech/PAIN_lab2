@@ -19,7 +19,8 @@ namespace PAIN_lab2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             AppModel model = new AppModel();
-            Point point = new Point(2, 3, 1);
+            Point point = new Point("Pierwszy", 2, 3);
+            point.changeColor(ColorDef.Black);
             model.AddPoint(point);
             Application.Run(new MDIParent1(model));
         }
